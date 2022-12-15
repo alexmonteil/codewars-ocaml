@@ -1,8 +1,6 @@
 open List;;
 open Hashtbl;;
 
-let lista = [1;2;2;3];;
-let listb = [1;2;2;3];;
 
 let comp a b = 
 
@@ -18,8 +16,8 @@ let comp a b =
       match list with 
       |[] -> ()
       |x :: y -> 
-        (let value = Hashtbl.find_opt tbl x in
-        match value with
+        let value = Hashtbl.find_opt tbl x in
+        (match value with
         |None -> Hashtbl.add tbl x 1
         |Some v -> Hashtbl.replace tbl x (v + 1));
         addingToHashtable y tbl in
@@ -27,14 +25,19 @@ let comp a b =
 
     addingToHashtable a ahash;
     addingToHashtable b bhash;
+    let isResultTrue = ref (true) in 
     Hashtbl.iter 
       (fun k v -> 
         match Hashtbl.find_opt bhash k with
-        |Some v' -> if v <> v' then false
-        |None -> false) 
-      ahash;;
-  
+        |Some v' -> if v <> v' then isResultTrue := false
+        |None -> isResultTrue := false) 
+      ahash;
 
+    isResultTrue in
+
+
+let lista = [1;2;2;3] in
+let listb = [1;2;2;3] in
 comp lista listb;;
 
   
