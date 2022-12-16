@@ -4,8 +4,8 @@ open Hashtbl;;
 
 let comp a b = 
 
-  let alength = length a in
-  let blength = length b in
+  let alength = List.length a in
+  let blength = List.length b in
   if alength <> blength 
     then false
   else
@@ -33,11 +33,11 @@ let comp a b =
         |None -> isResultTrue := false) 
       ahash;
 
-    isResultTrue in
+    !isResultTrue in
 
 
 let lista = [1;2;2;3] in
-let listb = [1;2;2;3] in
+let listb = [1;2;3;3] in
 comp lista listb;;
 
   
